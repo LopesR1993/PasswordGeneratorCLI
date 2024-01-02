@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PasswordGeneratorCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "password"
+    }
+  }
+}
