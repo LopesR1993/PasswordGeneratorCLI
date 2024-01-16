@@ -10,7 +10,13 @@ namespace PasswordGeneratorCLI.Services
         {
             char[] charCollection;
             int counter = 0;
-            if (configurations is not null)
+
+            if(configurations is not null && OnlyLengthProvided(configurations))
+            {
+                ValidateConfigurations(configurations);
+                charCollection = PopulateCharacters(configurations[Options.Length]);
+            }
+            else if (configurations is not null)
             {
                 ValidateConfigurations(configurations);
                 charCollection = new char[configurations[Options.Length]];
@@ -43,11 +49,7 @@ namespace PasswordGeneratorCLI.Services
             }
             else
             {
-                charCollection = new char[16];
-                for (int i = 0; i < charCollection.Length; i++)
-                {
-                    charCollection[i] = (GenerateCharacter());
-                }
+                charCollection = PopulateCharacters(16);
             }
 
             if (!charCollection.Any())
@@ -85,6 +87,23 @@ namespace PasswordGeneratorCLI.Services
             {
                 throw new InvalidPromptException("Numbers can't be less than 0.");
             }
+        }
+
+        private bool OnlyLengthProvided(Dictionary<Options, int> configurations) 
+        {
+            return configurations[Options.Length] > 0 &&
+                configurations[Options.Numbers] == 0 &&
+                configurations[Options.CapitalLetters] == 0 &&
+                configurations[Options.SpecialCharacters] == 0;
+        }
+        private char[] PopulateCharacters(int length)
+        {
+            var charCollection = new char[length];
+            for (int i = 0; i < charCollection.Length; i++)
+            {
+                charCollection[i] = (GenerateCharacter());
+            }
+            return charCollection;
         }
 
         private char GenerateCharacter()
