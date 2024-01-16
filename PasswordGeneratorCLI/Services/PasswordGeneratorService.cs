@@ -14,12 +14,32 @@ namespace PasswordGeneratorCLI.Services
             {
                 ValidateConfigurations(configurations);
                 charCollection = new char[configurations[Options.Length]];
-                
-                while (counter < configurations[Options.Length])
+
+                for (int i = 0; i < configurations[Options.CapitalLetters]; i++)
                 {
-                    charCollection[counter] = (GenerateCharacter());
+                    charCollection[counter] = GenerateCapitalCharacter();
                     counter++;
                 }
+
+                for (int i = 0; i < configurations[Options.Numbers]; i++)
+                {
+                    charCollection[counter] = GenerateNumber();
+                    counter++;
+                }
+
+                for (int i = 0; i < configurations[Options.SpecialCharacters]; i++)
+                {
+                    charCollection[counter] = GenerateSpecialCharacter();
+                    counter++;
+                }
+
+                while (counter < configurations[Options.Length])
+                {
+                    charCollection[counter] = (GenerateLowercaseCharacter());
+                    counter++;
+                }
+
+                Random.Shared.Shuffle(charCollection);
             }
             else
             {
