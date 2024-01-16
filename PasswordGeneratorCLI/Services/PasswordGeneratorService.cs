@@ -6,45 +6,35 @@ namespace PasswordGeneratorCLI.Services
     public class PasswordGeneratorService : IPasswordGeneratorService
     {
         private readonly Random random = new Random();
-        public string GeneratePassword(Dictionary<Options, int> configurations)
+        public string GeneratePassword(Dictionary<Options, int>? configurations = null)
         {
-            ValidateConfigurations(configurations);
-
-            char[] charCollection = new char[configurations[Options.Length]];
-
+            char[] charCollection;
             int counter = 0;
-            while (counter < configurations[Options.Length])
+            if (configurations is not null)
             {
-                charCollection[counter] = (GenerateCharacter());
-                counter++;
+                ValidateConfigurations(configurations);
+                charCollection = new char[configurations[Options.Length]];
+                
+                while (counter < configurations[Options.Length])
+                {
+                    charCollection[counter] = (GenerateCharacter());
+                    counter++;
+                }
             }
-
+            else
+            {
+                charCollection = new char[16];
+                for (int i = 0; i < charCollection.Length; i++)
+                {
+                    charCollection[i] = (GenerateCharacter());
+                }
+            }
 
             if (!charCollection.Any())
             {
                 throw new Exception("There was an error generating the password");
             }
 
-            var output = new string(charCollection);
-
-            if (output is null)
-            {
-                throw new Exception("There was an error parsing the generated data.");
-            }
-            return output;
-        }
-        public string GeneratePassword()
-        {
-            char[] charCollection = new char[16];
-            for (int i = 0; i < 16; i++)
-            {
-                charCollection[i] = (GenerateCharacter());
-
-            }
-            if (!charCollection.Any())
-            {
-                throw new Exception("There was an error generating the password");
-            }
             var output = new string(charCollection);
 
             if (output is null)

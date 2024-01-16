@@ -4,7 +4,6 @@ namespace PasswordGeneratorCLI.Services
 {
     public interface IPasswordGeneratorService
     {
-        string GeneratePassword(Dictionary<Options,int> configurations);
-        string GeneratePassword();
+        string GeneratePassword(Dictionary<Options,int>? configurations = null);
     }
 }
