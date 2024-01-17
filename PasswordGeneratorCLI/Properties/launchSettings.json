@@ -2,7 +2,7 @@
   "profiles": {
     "PasswordGeneratorCLI": {
       "commandName": "Project",
-      "commandLineArgs": "password"
+      "commandLineArgs": "generate"
     }
   }
 }
