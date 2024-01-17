@@ -5,7 +5,7 @@ This is a command-line interface (CLI) tool written in C# that generates random 
 
 ## Features
 - Generate random secure passwords of 16 characters by default.
-- Generate random secure passwords with dynamic composition.
+- Generate random secure passwords with dynamic composition and length.
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/LopesR1993/PasswordGeneratorCLI.git`
@@ -13,21 +13,20 @@ This is a command-line interface (CLI) tool written in C# that generates random 
 3. Build the project: `dotnet build`
 
 ## Usage
-Run the tool with the following command: `dotnet run`
-
-## Contributing
-Pull requests are welcome.
-
-## Release 0.2
--Added support to dynamic password composition with the following parameters:
+Run the tool with the following command: `dotnet run -- password`
 - `-l` : defines the length of the password
 - `-s` : defines the number of special characters needed
 - `-n` : defines the amount of number characthers needed
 - `-u` : defines the the number of uppercase letters needed
 
+## Contributing
+Pull requests are welcome.
+
+## Release 0.3
+Added support to only provide `-l` argument and generate the rest of the characthers randomly
+
 ## Future Upgrades
 - Generating multiple passwords at once.
-- Generate secure passwords even if only the length is provided
 
 ## License
 MIT
