@@ -11,7 +11,7 @@ namespace PasswordGeneratorCLI.Commands
         {
             _passwordGeneratorService = passwordGeneratorService;
         }
-        [Command("password")]
+        [Command("generate")]
         public void GeneratePassword(
             [Option('l')] string? length = null,
             [Option('n')] string? number = null,
